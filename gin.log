@@ -2,12 +2,30 @@
  - using env:	export GIN_MODE=release
  - using code:	gin.SetMode(gin.ReleaseMode)
 
-[GIN-debug] GET    /videos                   --> main.main.func1 (5 handlers)
-[GIN-debug] POST   /videos                   --> main.main.func2 (5 handlers)
+[GIN-debug] GET    /css/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (1 handlers)
+[GIN-debug] HEAD   /css/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (1 handlers)
+[GIN-debug] Loaded HTML Templates (4): 
+	- 
+	- footer.html
+	- header.html
+	- index.html
+
+[GIN-debug] GET    /api/videos               --> main.main.func1 (5 handlers)
+[GIN-debug] POST   /api/videos               --> main.main.func2 (5 handlers)
+[GIN-debug] GET    /view/videos              --> GitHub.com/LigeronAhill/GinLearning/controller.VideoController.ShowAll-fm (5 handlers)
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
 [GIN-debug] Listening and serving HTTP on :8080
-127.0.0.1 - [22 Sep 23 11:57 MSK] "GET /videos 200 243µs
-127.0.0.1 - [22 Sep 23 11:58 MSK] "POST /videos 200 387.9µs
-127.0.0.1 - [22 Sep 23 11:58 MSK] "POST /videos 200 696.6µs
-127.0.0.1 - [22 Sep 23 11:58 MSK] "GET /videos 200 1.6549ms
+127.0.0.1 - [22 Sep 23 16:01 MSK] "POST /videos 404 503.8µs
+127.0.0.1 - [22 Sep 23 16:02 MSK] "GET /api/videos 200 1.8855ms
+127.0.0.1 - [22 Sep 23 16:03 MSK] "POST /api/videos 200 2.7161ms
+127.0.0.1 - [22 Sep 23 16:03 MSK] "POST /api/videos 200 1.6152ms
+::1 - [22 Sep 23 16:03 MSK] "GET /view/videos 200 1.4681ms
+::1 - [22 Sep 23 16:03 MSK] "GET /view/css/index.css 404 2.2156ms
+::1 - [22 Sep 23 16:03 MSK] "GET /view/videos 200 1.9179ms
+::1 - [22 Sep 23 16:03 MSK] "GET /view/css/index.css 404 751.6µs
+127.0.0.1 - [22 Sep 23 16:05 MSK] "POST /api/videos 200 687.8µs
+127.0.0.1 - [22 Sep 23 16:05 MSK] "POST /api/videos 200 1.1528ms
+127.0.0.1 - [22 Sep 23 16:05 MSK] "GET /api/videos 200 813.3µs
+::1 - [22 Sep 23 16:05 MSK] "GET /view/videos 200 1.7527ms
+::1 - [22 Sep 23 16:05 MSK] "GET /view/css/index.css 404 1.0996ms
