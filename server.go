@@ -8,12 +8,13 @@ import (
 	gindump "github.com/tpkeeper/gin-dump"
 	"io"
 	"log"
+	"net/http"
 	"os"
 )
 
 var (
-	videoService    service.VideoService       = service.New()
-	videoController controller.VideoController = controller.New(videoService)
+	videoService       = service.New()
+	videoController, _ = controller.New(videoService)
 )
 
 func setupLogOutput() {
@@ -35,7 +36,11 @@ func main() {
 	})
 
 	server.POST("/videos", func(ctx *gin.Context) {
-		ctx.JSON(200, videoController.Save(ctx))
+		if err := videoController.Save(ctx); err != nil {
+			ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		} else {
+			ctx.JSON(http.StatusOK, gin.H{"message": "Video Input is Valid"})
+		}
 	})
 
 	if err := server.Run(":8080"); err != nil {
