@@ -5,7 +5,6 @@ import (
 	"GitHub.com/LigeronAhill/GinLearning/middlewares"
 	"GitHub.com/LigeronAhill/GinLearning/service"
 	"github.com/gin-gonic/gin"
-	gindump "github.com/tpkeeper/gin-dump"
 	"io"
 	"log"
 	"net/http"
@@ -34,9 +33,9 @@ func main() {
 
 	server.LoadHTMLGlob("templates/*.html")
 
-	server.Use(gin.Recovery(), middlewares.Logger(), middlewares.BasicAuth(), gindump.Dump())
+	server.Use(gin.Recovery(), middlewares.Logger())
 
-	apiRoutes := server.Group("/api")
+	apiRoutes := server.Group("/api", middlewares.BasicAuth())
 	{
 		apiRoutes.GET("/videos", func(ctx *gin.Context) {
 			ctx.JSON(200, videoController.FindAll())
@@ -56,7 +55,11 @@ func main() {
 		viewRoutes.GET("/videos", videoController.ShowAll)
 	}
 
-	if err := server.Run(":8080"); err != nil {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	if err := server.Run(":" + port); err != nil {
 		log.Fatal(err)
 	}
 }
